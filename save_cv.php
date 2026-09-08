@@ -25,9 +25,9 @@ require_once __DIR__ . '/db.php';
 
 try {
     // 1. استقبال وتطهير البيانات النصية (Sanitization)
-    $full_name = isset($_POST['full_name']) ? trim(filter_var($_POST['full_name'], FILTER_SANITIZE_SPECIAL_CHARS)) : '';
-    $job_title = isset($_POST['job_title']) ? trim(filter_var($_POST['job_title'], FILTER_SANITIZE_SPECIAL_CHARS)) : '';
-    $phone     = isset($_POST['phone'])     ? trim(filter_var($_POST['phone'], FILTER_SANITIZE_SPECIAL_CHARS)) : '';
+    $full_name = isset($_POST['full_name']) ? trim(strip_tags($_POST['full_name'])) : '';
+    $job_title = isset($_POST['job_title']) ? trim(strip_tags($_POST['job_title'])) : '';
+    $phone     = isset($_POST['phone'])     ? trim(strip_tags($_POST['phone'])) : '';
     $email     = isset($_POST['email'])     ? trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL)) : '';
     $bio       = isset($_POST['bio'])       ? trim($_POST['bio']) : '';
     $skills    = isset($_POST['skills'])    ? trim($_POST['skills']) : '';
@@ -46,7 +46,7 @@ try {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo json_encode([
             'status'  => 'error',
-            'message' => 'صيغة البريد الإلكتروني غير صحيحة، يرجى إدخال بريد إلكتروني صالح.'
+            'message' => 'صيغة البريد الإلكتروني غير صحيحة، يرجى كتابة بريد صالح (مثال: name@example.com).'
         ], JSON_UNESCAPED_UNICODE);
         exit;
     }
@@ -57,10 +57,10 @@ try {
 
     // التأكد من وجود مجلد uploads وإنشائه إن لم يكن موجوداً
     if (!is_dir($upload_dir)) {
-        if (!mkdir($upload_dir, 0755, true)) {
+        if (!mkdir($upload_dir, 0777, true)) {
             echo json_encode([
                 'status'  => 'error',
-                'message' => 'تعذر إنشاء مجلد رفع الصور uploads على الخادم.'
+                'message' => 'تعذر إنشاء مجلد رفع الصور uploads على الخادم. يرجى التحقق من صلاحيات المجلد.'
             ], JSON_UNESCAPED_UNICODE);
             exit;
         }
@@ -69,26 +69,32 @@ try {
     if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] !== UPLOAD_ERR_NO_FILE) {
         $file = $_FILES['profile_image'];
 
-        // التحقق من عدم وجود أخطاء في رفع الملف
+        // التحقق من أكواد أخطاء الرفع
         if ($file['error'] !== UPLOAD_ERR_OK) {
-            echo json_encode([
-                'status'  => 'error',
-                'message' => 'حدث خطأ أثناء رفع الصورة (كود الخطأ: ' . $file['error'] . ').'
-            ], JSON_UNESCAPED_UNICODE);
+            $uploadErrors = [
+                UPLOAD_ERR_INI_SIZE   => 'حجم الصورة يتجاوز الحد المسموح به في إعدادات السيرفر.',
+                UPLOAD_ERR_FORM_SIZE  => 'حجم الصورة يتجاوز الحد المسموح به في النموذج.',
+                UPLOAD_ERR_PARTIAL    => 'تم رفع جزء من ملف الصورة فقط، يرجى المحاولة ثانية.',
+                UPLOAD_ERR_NO_TMP_DIR => 'المجلد المؤقت للرفع غير متوفر على السيرفر.',
+                UPLOAD_ERR_CANT_WRITE => 'فشل في كتابة وحفظ ملف الصورة على القرص.',
+                UPLOAD_ERR_EXTENSION  => 'تم إيقاف رفع الملف بواسطة إضافة برمجية في PHP.',
+            ];
+            $errMessage = $uploadErrors[$file['error']] ?? ('خطأ أثناء رفع الصورة رقم: ' . $file['error']);
+            echo json_encode(['status' => 'error', 'message' => $errMessage], JSON_UNESCAPED_UNICODE);
             exit;
         }
 
-        // تحديد الحد الأقصى لحجم الملف (3 ميجابايت)
-        $max_size = 3 * 1024 * 1024;
+        // الحد الأقصى 5 ميجابايت
+        $max_size = 5 * 1024 * 1024;
         if ($file['size'] > $max_size) {
             echo json_encode([
                 'status'  => 'error',
-                'message' => 'حجم الصورة كبير جداً. الحد الأقصى المسموح به هو 3 ميجابايت.'
+                'message' => 'حجم الصورة كبير جداً. الحد الأقصى المسموح به هو 5 ميجابايت.'
             ], JSON_UNESCAPED_UNICODE);
             exit;
         }
 
-        // التحقق من نوع الملف المرفوع (MIME Type) لضمان الأمان
+        // التحقق من نوع الملف المرفوع
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $mime_type = finfo_file($finfo, $file['tmp_name']);
         finfo_close($finfo);
@@ -108,7 +114,7 @@ try {
             exit;
         }
 
-        // توليد اسم فريد وآمن للصورة لمنع التعارض أو استبدال الملفات
+        // توليد اسم فريد للصورة
         $extension = $allowed_mimes[$mime_type];
         $new_filename = 'cv_' . bin2hex(random_bytes(8)) . '_' . time() . '.' . $extension;
         $destination = $upload_dir . $new_filename;
@@ -117,16 +123,15 @@ try {
         if (!move_uploaded_file($file['tmp_name'], $destination)) {
             echo json_encode([
                 'status'  => 'error',
-                'message' => 'فشل في نقل الصورة إلى المجلد النهائي uploads.'
+                'message' => 'فشل في حفظ الصورة داخل مجلد uploads. يرجى مراجعة الصلاحيات.'
             ], JSON_UNESCAPED_UNICODE);
             exit;
         }
 
-        // حفظ المسار النسبي لحفظه في قاعدة البيانات
         $image_path = 'uploads/' . $new_filename;
     }
 
-    // 3. إدخال البيانات في قاعدة البيانات باستخدام Prepared Statements لحماية النظام
+    // 3. إدخال البيانات في قاعدة البيانات باستخدام Prepared Statements
     $sql = "INSERT INTO `cv_data` 
             (`full_name`, `job_title`, `phone`, `email`, `bio`, `skills`, `projects`, `image_path`) 
             VALUES (:full_name, :job_title, :phone, :email, :bio, :skills, :projects, :image_path)";
@@ -145,7 +150,7 @@ try {
 
     $lastInsertId = $pdo->lastInsertId();
 
-    // 4. إرجاع استجابة النجاح بصيغة JSON
+    // 4. إرجاع استجابة النجاح
     echo json_encode([
         'status'     => 'success',
         'message'    => 'تم حفظ السيرة الذاتية بنجاح في قاعدة البيانات!',

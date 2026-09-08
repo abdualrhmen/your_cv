@@ -230,12 +230,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            const result = await response.json();
+            // التحقق من نوع الاستجابة وتفاصيل الحالة
+            const contentType = response.headers.get('content-type') || '';
+            let result;
+
+            if (contentType.includes('application/json')) {
+                result = await response.json();
+            } else {
+                const rawText = await response.text();
+                console.error('Server non-JSON response:', rawText);
+                throw new Error(`استجابة غير متوقعة من السيرفر (كود الحالة: ${response.status}). يرجى التحقق من لوحة التحكم أو ملف save_cv.php`);
+            }
 
             if (result.status === 'success') {
                 showToast(result.message || 'تم حفظ السيرة الذاتية بنجاح!', 'success');
                 
-                // في حال تم رفع صورة وتم إرجاع مسارها، يتم تحديث الرابط إن رغبنا
+                // في حال تم رفع صورة وتم إرجاع مسارها، يتم تحديث الرابط في المعاينة
                 if (result.image_path) {
                     previewAvatar.dataset.savedPath = result.image_path;
                 }
@@ -244,7 +254,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             console.error('Save CV Error:', error);
-            showToast('تعذر الاتصال بالخادم، يرجى التأكد من تشغيل Apache & MySQL في XAMPP.', 'error');
+            const errorMsg = error.message || 'تعذر الاتصال بالخادم، يرجى التأكد من تشغيل Apache & MySQL في XAMPP.';
+            showToast(errorMsg, 'error');
         } finally {
             setButtonLoading(false);
         }
@@ -308,10 +319,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // -------------------------------------------------------
     function initDefaultData() {
         // تعبئة بعض الحقول الأولية النموذجية لتبدو السيرة الذاتية مكتملة وجذابة عند الفتح
-        inputFullName.value = 'أحمد المنصور';
+        inputFullName.value = 'عبدالرحمن علي الحميدي';
         inputJobTitle.value = 'مهندس برمجيات ومطور واجهات ويب';
-        inputPhone.value = '+966 50 123 4567';
-        inputEmail.value = 'ahmed.mansour@example.com';
+        inputPhone.value = '+967 713766854';
+        inputEmail.value = 'alhmydybdalrhmn997@gmail.com';
         inputBio.value = 'مهندس برمجيات متمرس بخبرة تتجاوز 5 سنوات في بناء وتطوير منصات الويب الحديثة وتصميم واجهات المستخدم التفاعلية. شغوف بالأداء العالي وتجربة المستخدم وتطبيق أفضل الممارسات البرمجية.';
         
         inputSkills.value = `تطوير الواجهات Front-End * خبير
@@ -336,5 +347,12 @@ Git & Version Control * خبير`;
     }
 
     initDefaultData();
+
+    // التحقق من طريقة فتح الصفحة (إذا فُتحت عبر file:// يتم إرشاد المستخدم إلى localhost)
+    if (window.location.protocol === 'file:') {
+        setTimeout(() => {
+            showToast('تنبيه: أنت تفتح الصفحة كملف محلي. يجب تشغيلها عبر سيرفر XAMPP: http://localhost/cv-builder/', 'error');
+        }, 800);
+    }
 
 });

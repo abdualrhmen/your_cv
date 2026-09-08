@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // تعبئة بعض الحقول الأولية النموذجية لتبدو السيرة الذاتية مكتملة وجذابة عند الفتح
         inputFullName.value = 'عبدالرحمن علي الحميدي';
         inputJobTitle.value = 'مهندس برمجيات ومطور واجهات ويب';
-        inputPhone.value = '+967 713766854';
+        inputPhone.value = '713 766 854';
         inputEmail.value = 'alhmydybdalrhmn997@gmail.com';
         inputBio.value = 'مهندس برمجيات متمرس بخبرة تتجاوز 5 سنوات في بناء وتطوير منصات الويب الحديثة وتصميم واجهات المستخدم التفاعلية. شغوف بالأداء العالي وتجربة المستخدم وتطبيق أفضل الممارسات البرمجية.';
         

@@ -1,0 +1,758 @@
+/* ==========================================================================
+   ملف التنسيقات الشامل والمحسّن للقوالب الأربعة (cv-templates.css)
+   - متوافق 100% مع معايير الجودة (QA) وواجهات المستخدم (UI/UX)
+   - دعم كامل للغة العربية والاتجاه من اليمين لليسار (RTL & Logical Properties)
+   - متوافق تماماً مع قياسات A4 ومحسن للطباعة وتصدير PDF بدون تشوهات
+   - يعتمد كلياً على Flexbox و CSS Grid بدون Position Absolute للمحتوى
+   - تباين ألوان عالي ومطابق لمعايير إمكانية الوصول (WCAG AA)
+   - يعمل على هيكل HTML موحد 100% عبر التبديل بالكلاسات:
+     1. theme-professional   (المسار الاحترافي)
+     2. theme-creative       (القالب الإبداعي)
+     3. theme-modern         (الرؤية الحديثة)
+     4. theme-comprehensive  (الاحترافي الشامل)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. المتغيرات العامة والخطوط (Design Tokens & Typography)
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
+
+:root {
+  --teal-primary: #0b7a6f;          /* الأخضر المزرق الأساسي */
+  --teal-dark: #085951;             /* درجة أغمق للأزرار والنصوص المركزة */
+  --teal-light: #e6f4f2;            /* خلفية فاتحة للبادجات والوسوم */
+  --teal-accent: #5eead4;           /* لون إضاءة للنصوص والأيقونات فوق الخلفيات الداكنة */
+  --dark-slate: #2c3e50;            /* الرمادي الداكن للهيدر والأشرطة الجانبية */
+  --dark-slate-deep: #1e2b37;       /* درجة أعمق للظلال والحدود الداكنة */
+  --text-dark: #1e293b;             /* لون النص الرئيسي عالي التباين */
+  --text-muted: #64748b;            /* لون النصوص الفرعية والتواريخ */
+  --bg-white: #ffffff;              /* خلفية الورقة البيضاء */
+  --bg-soft: #f8fafc;               /* خلفية بطاقات المشاريع الرمادية الهادئة */
+  --border-light: #e2e8f0;          /* لون الفواصل الخفيفة */
+  --font-tajawal: 'Tajawal', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   2. الإعدادات الأساسية لورقة A4 (A4 Canvas Container)
+   -------------------------------------------------------------------------- */
+#cv-container {
+  width: 210mm;
+  max-width: 210mm;
+  min-height: 297mm;
+  background-color: var(--bg-white);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  direction: rtl;
+  text-align: right;
+  font-family: var(--font-tajawal);
+  color: var(--text-dark);
+  line-height: 1.55;
+  transform-origin: top center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* --------------------------------------------------------------------------
+   3. تنسيقات العناصر المشتركة في هيكل HTML الموحد
+   -------------------------------------------------------------------------- */
+#cv-container * {
+  box-sizing: border-box;
+}
+
+.cv-photo-box img {
+  display: block;
+  object-fit: cover;
+}
+
+.cv-section-title {
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.timeline-item, .edu-item, .project-card {
+  margin-bottom: 12px;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.item-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.item-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.item-date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.item-subtitle {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--teal-primary);
+  margin-bottom: 4px;
+}
+
+.item-desc {
+  font-size: 0.85rem;
+  color: #475569;
+  line-height: 1.55;
+}
+
+/* شبكة المهارات المشتركة */
+.cv-skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-pill {
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: var(--teal-light);
+  color: var(--teal-primary);
+  border: 1px solid rgba(11, 122, 111, 0.2);
+}
+
+/* ==========================================================================
+   القالب الأول: "المسار الاحترافي" (class="theme-professional")
+   - كلاسيكي، نظيف وبسيط، خلفية بيضاء بالكامل.
+   - الصورة دائرية بحدود خضراء في أعلى اليسار، والاسم والمسمى أعلى اليمين.
+   - عناوين الأقسام باللون الأخضر (#0b7a6f) مع خط أفقي رفيع ممتد بجوار العنوان.
+   ========================================================================== */
+#cv-container.theme-professional {
+  padding: 40px 45px;
+  background-color: var(--bg-white);
+}
+
+#cv-container.theme-professional .cv-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-bottom: 1.5px solid var(--border-light);
+  padding-bottom: 22px;
+  margin-bottom: 24px;
+}
+
+#cv-container.theme-professional .cv-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#cv-container.theme-professional .cv-identity-box {
+  order: 1; /* أعلى اليمين في RTL */
+}
+
+#cv-container.theme-professional #cv-name {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--dark-slate);
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+
+#cv-container.theme-professional #cv-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--teal-primary);
+}
+
+#cv-container.theme-professional .cv-photo-box {
+  order: 2; /* أعلى اليسار في RTL */
+}
+
+#cv-container.theme-professional #cv-image {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 2.5px solid var(--teal-primary);
+  padding: 2px;
+  background-color: var(--bg-white);
+}
+
+#cv-container.theme-professional .cv-contact-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+}
+
+#cv-container.theme-professional .cv-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#cv-container.theme-professional .cv-contact-item .contact-icon {
+  color: var(--teal-primary);
+}
+
+/* عناوين الأقسام مع خط أفقي ممتد */
+#cv-container.theme-professional .cv-section {
+  margin-bottom: 22px;
+  break-inside: avoid;
+}
+
+#cv-container.theme-professional .cv-section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+#cv-container.theme-professional .cv-section-title {
+  font-size: 1.15rem;
+  color: var(--teal-primary);
+  white-space: nowrap;
+}
+
+#cv-container.theme-professional .cv-section-line {
+  display: block;
+  flex: 1;
+  height: 1.5px;
+  background-color: var(--teal-primary);
+  opacity: 0.35;
+}
+
+#cv-container.theme-professional #cv-bio {
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  line-height: 1.7;
+}
+
+#cv-container.theme-professional .cv-projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+#cv-container.theme-professional .project-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+
+#cv-container.theme-professional .project-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--teal-primary);
+  margin-bottom: 4px;
+}
+
+/* ==========================================================================
+   القالب الثاني: "القالب الإبداعي" (class="theme-creative")
+   - شريط جانبي 30% يميناً بخلفية داكنة (#2c3e50) وقسم أيسر 70% بخلفية بيضاء.
+   - يعتمد كلياً على CSS Grid وتفكيك الحاويات عبر display: contents لتوزيع
+     عناصر الهيكل الموحد بسلاسة بين العمودين بدون أي تداخلات أو position absolute.
+   - تباين عالي: نصوص بيضاء وأيقونات مينت فاتحة (#5eead4) في العمود الداكن.
+   ========================================================================== */
+#cv-container.theme-creative {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  background: linear-gradient(to left, var(--dark-slate) 30%, #ffffff 30%);
+  padding: 0;
+  min-height: 297mm;
+}
+
+/* تفكيك الحاويات لتصبح عناصرها المباشرة أعضاء في شبكة الـ Grid الرئيسية */
+#cv-container.theme-creative .cv-header,
+#cv-container.theme-creative .cv-header-top,
+#cv-container.theme-creative .cv-main {
+  display: contents;
+}
+
+/* --- العمود الأيمن الداكن (Column 1 - 30%) --- */
+
+/* 1. الصورة الشخصية في أعلى العمود الداكن */
+#cv-container.theme-creative .cv-photo-box {
+  grid-column: 1;
+  grid-row: 1;
+  padding: 38px 18px 16px;
+  text-align: center;
+}
+
+#cv-container.theme-creative #cv-image {
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  border: 3px solid var(--teal-accent);
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* 2. بيانات الاتصال أسفل الصورة في العمود الداكن */
+#cv-container.theme-creative .cv-contact-box {
+  grid-column: 1;
+  grid-row: 2;
+  padding: 10px 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 0.82rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+#cv-container.theme-creative .cv-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #f1f5f9; /* نص أبيض مريح للعين */
+}
+
+#cv-container.theme-creative .cv-contact-item .contact-icon {
+  color: var(--teal-accent); /* أيقونة مينت ساطعة لضمان التباين */
+  font-size: 0.95rem;
+}
+
+/* 3. قسم المهارات في العمود الداكن */
+#cv-container.theme-creative .cv-skills-section {
+  grid-column: 1;
+  grid-row: 3 / span 4;
+  padding: 20px 18px;
+}
+
+#cv-container.theme-creative .cv-skills-section .cv-section-title {
+  color: var(--teal-accent);
+  font-size: 1rem;
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 6px;
+}
+
+#cv-container.theme-creative .cv-skills-section .cv-section-line {
+  display: none;
+}
+
+#cv-container.theme-creative .cv-skills-section .skill-pill {
+  background: rgba(11, 122, 111, 0.35);
+  color: #ffffff;
+  border: 1px solid rgba(94, 234, 212, 0.4);
+  width: 100%;
+  text-align: center;
+  padding: 6px 8px;
+  font-size: 0.82rem;
+}
+
+/* --- العمود الأيسر الأبيض (Column 2 - 70%) --- */
+
+/* 1. الاسم والمسمى الوظيفي */
+#cv-container.theme-creative .cv-identity-box {
+  grid-column: 2;
+  grid-row: 1;
+  padding: 38px 35px 12px;
+}
+
+#cv-container.theme-creative #cv-name {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--teal-primary);
+  margin-bottom: 4px;
+}
+
+#cv-container.theme-creative #cv-title {
+  font-size: 1.1rem;
+  color: var(--dark-slate);
+  font-weight: 600;
+}
+
+/* 2. أقسام المحتوى في العمود الأبيض */
+#cv-container.theme-creative .cv-bio-section {
+  grid-column: 2;
+  grid-row: 2;
+  padding: 0 35px 18px;
+}
+
+#cv-container.theme-creative .cv-exp-section {
+  grid-column: 2;
+  grid-row: 3;
+  padding: 0 35px 18px;
+}
+
+#cv-container.theme-creative .cv-edu-section {
+  grid-column: 2;
+  grid-row: 4;
+  padding: 0 35px 18px;
+}
+
+#cv-container.theme-creative .cv-projects-section {
+  grid-column: 2;
+  grid-row: 5;
+  padding: 0 35px 35px;
+}
+
+#cv-container.theme-creative .cv-section-title {
+  color: var(--teal-primary);
+  font-size: 1.12rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#cv-container.theme-creative .cv-section-line {
+  display: block;
+  flex: 1;
+  height: 2px;
+  background-color: var(--teal-light);
+}
+
+#cv-container.theme-creative .project-card {
+  border-inline-start: 3.5px solid var(--teal-primary);
+  background: var(--bg-soft);
+  padding: 10px 14px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   القالب الثالث: "الرؤية الحديثة" (class="theme-modern")
+   - هيدر ملون بخلفية خضراء واسعة (#0b7a6f).
+   - الاسم والمسمى بالأبيض ودرجات النعناع المضيئة داخل الهيدر.
+   - الصورة تتداخل بسلاسة بين الهيدر والمحتوى الأبيض بدون Position Absolute،
+     بل باستخدام الهامش الممتد الطبيعي (Negative Margin) لضمان عدم تداخل النصوص.
+   ========================================================================== */
+#cv-container.theme-modern {
+  padding: 0;
+  background-color: var(--bg-white);
+}
+
+#cv-container.theme-modern .cv-header {
+  background: var(--teal-primary);
+  color: #ffffff;
+  padding: 38px 45px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#cv-container.theme-modern .cv-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+#cv-container.theme-modern .cv-identity-box {
+  max-width: 65%;
+}
+
+#cv-container.theme-modern #cv-name {
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+#cv-container.theme-modern #cv-title {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #d1fae5; /* أخضر فاتح مريح وعالي التباين */
+}
+
+/* تداخل الصورة عبر Flexbox و Negative Margin في التدفق الطبيعي */
+#cv-container.theme-modern .cv-photo-box {
+  margin-bottom: -75px;
+  z-index: 5;
+  position: relative;
+}
+
+#cv-container.theme-modern #cv-image {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+}
+
+#cv-container.theme-modern .cv-contact-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  font-size: 0.85rem;
+  color: #f0fdfa;
+}
+
+#cv-container.theme-modern .cv-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#cv-container.theme-modern .cv-contact-item .contact-icon {
+  color: var(--teal-accent);
+}
+
+/* المحتوى السفلي في الرؤية الحديثة */
+#cv-container.theme-modern .cv-main {
+  padding: 48px 45px 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#cv-container.theme-modern .cv-section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#cv-container.theme-modern .cv-section-title {
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: var(--teal-primary);
+  background-color: var(--teal-light);
+  padding: 4px 14px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+#cv-container.theme-modern .cv-section-line {
+  display: none;
+}
+
+#cv-container.theme-modern #cv-bio {
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  line-height: 1.7;
+}
+
+#cv-container.theme-modern .cv-projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+#cv-container.theme-modern .project-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-top: 3px solid var(--teal-primary);
+  border-radius: 4px;
+  padding: 12px 14px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+}
+
+/* ==========================================================================
+   القالب الرابع: "القالب الاحترافي الشامل" (class="theme-comprehensive")
+   - شريط علوي داكن رفيع (#2c3e50) وصورة صغيرة على أقصى اليمين.
+   - المحتوى السفلي مقسم بنظام شبكة CSS Grid مكثفة واحترافية.
+   - عناوين الأقسام تتميز بحدود سفلية خضراء بارزة (2.5px solid #0b7a6f).
+   ========================================================================== */
+#cv-container.theme-comprehensive {
+  padding: 0;
+  background-color: var(--bg-white);
+}
+
+/* الهيدر العلوي الداكن الرفيع */
+#cv-container.theme-comprehensive .cv-header {
+  background-color: var(--dark-slate);
+  color: #ffffff;
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+#cv-container.theme-comprehensive .cv-header-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+#cv-container.theme-comprehensive .cv-photo-box {
+  order: 1; /* أقصى اليمين في RTL */
+}
+
+#cv-container.theme-comprehensive #cv-image {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+}
+
+#cv-container.theme-comprehensive .cv-identity-box {
+  order: 2;
+}
+
+#cv-container.theme-comprehensive #cv-name {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+#cv-container.theme-comprehensive #cv-title {
+  font-size: 0.95rem;
+  color: #cbd5e1; /* رمادي فاتح مريح وعالي التباين */
+  font-weight: 500;
+}
+
+#cv-container.theme-comprehensive .cv-contact-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: #e2e8f0;
+}
+
+#cv-container.theme-comprehensive .cv-contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+}
+
+#cv-container.theme-comprehensive .cv-contact-item .contact-icon {
+  color: var(--teal-accent);
+}
+
+/* شبكة المحتوى الداخلي (CSS Grid) المكثفة */
+#cv-container.theme-comprehensive .cv-main {
+  padding: 24px 32px 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 24px;
+  row-gap: 16px;
+}
+
+/* توزيع الأقسام على أعمدة الشبكة */
+#cv-container.theme-comprehensive .cv-bio-section {
+  grid-column: 1 / -1; /* يمتد عبر العمودين */
+}
+
+#cv-container.theme-comprehensive .cv-exp-section {
+  grid-column: 1 / -1; /* يمتد عبر العمودين */
+}
+
+#cv-container.theme-comprehensive .cv-edu-section {
+  grid-column: 1;      /* العمود الأيمن */
+}
+
+#cv-container.theme-comprehensive .cv-skills-section {
+  grid-column: 2;      /* العمود الأيسر */
+}
+
+#cv-container.theme-comprehensive .cv-projects-section {
+  grid-column: 1 / -1; /* يمتد عبر العمودين */
+}
+
+/* حدود سفلية خضراء بارزة لعناوين الأقسام */
+#cv-container.theme-comprehensive .cv-section-header {
+  margin-bottom: 10px;
+}
+
+#cv-container.theme-comprehensive .cv-section-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--teal-primary);
+  border-bottom: 2.5px solid var(--teal-primary);
+  padding-bottom: 4px;
+  display: block;
+}
+
+#cv-container.theme-comprehensive .cv-section-line {
+  display: none;
+}
+
+#cv-container.theme-comprehensive .timeline-item {
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--border-light);
+}
+
+#cv-container.theme-comprehensive .timeline-item:last-child {
+  border-bottom: none;
+}
+
+#cv-container.theme-comprehensive .cv-projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+#cv-container.theme-comprehensive .project-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  padding: 10px 12px;
+}
+
+/* --------------------------------------------------------------------------
+   4. إعدادات الطباعة الدقيقة وتصدير PDF المعتمدة (A4 Print Engine)
+   -------------------------------------------------------------------------- */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 210mm !important;
+  }
+
+  /* إخفاء عناصر الموقع والأشرطة عند أمر الطباعة */
+  .no-print,
+  .site-header,
+  .site-footer,
+  .builder-sidebar,
+  .floating-zoom-toolbar,
+  #cvToastNotification {
+    display: none !important;
+  }
+
+  .builder-layout {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .builder-preview-area {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+  }
+
+  /* تثبيت ورقة السيرة الذاتية بدقة قياس A4 */
+  #cv-container {
+    box-shadow: none !important;
+    width: 210mm !important;
+    max-width: 210mm !important;
+    min-height: 297mm !important;
+    margin: 0 auto !important;
+    border: none !important;
+    transform: none !important;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .timeline-item,
+  .edu-item,
+  .project-card,
+  .cv-section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}

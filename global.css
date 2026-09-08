@@ -1,0 +1,1418 @@
+/* ==========================================================================
+   صانع السير الذاتية - ملف التنسيقات الشامل (global.css)
+   نظام التصميم: Pure CSS3, RTL Arabic, Responsive Design
+   الخط الأساسي: Tajawal من Google Fonts
+   الألوان: الأخضر المزرق الداكن (#0b7a6f)، الرمادي الفاتح، والأبيض
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. متغيرات الألوان والتصميم (CSS Custom Properties)
+   -------------------------------------------------------------------------- */
+:root {
+  /* ألوان الهوية الرئيسية */
+  --primary: #0b7a6f;
+  --primary-hover: #085f57;
+  --primary-light: #e6f4f2;
+  --primary-border: #80c4be;
+
+  /* درجات الرمادي والأسطح */
+  --bg-page: #f8fafc;
+  --bg-sidebar: #f3f5f8;
+  --bg-card: #ffffff;
+  --border-color: #e2e8f0;
+  --border-light: #edf2f7;
+
+  /* ألوان النصوص */
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+
+  /* شارات التمييز */
+  --badge-new: #2563eb;
+  --badge-selected: #0b7a6f;
+
+  /* الخطوط والظلال والأبعاد */
+  --font-tajawal: 'Tajawal', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+  --radius-pill: 9999px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  --shadow-a4: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   2. إعادة الضبط والتنسيق الأساسي (Reset & Base)
+   -------------------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-tajawal);
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  direction: rtl;
+  text-align: right;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: all 0.2s ease;
+}
+
+/* حاوية العرض المتجاوبة */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* --------------------------------------------------------------------------
+   3. الهيدر الموحد لجميع الصفحات (Unified Header)
+   -------------------------------------------------------------------------- */
+.site-header {
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.site-header .header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  max-width: 1350px;
+  margin: 0 auto;
+}
+
+/* الشعار */
+.site-logo {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* روابط التنقل الرئيسية */
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-link {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-main);
+  position: relative;
+  padding: 6px 0;
+}
+
+.nav-link:hover {
+  color: var(--primary);
+}
+
+.nav-link.active {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background-color: var(--primary);
+  border-radius: 2px;
+}
+
+/* أزرار الهيدر يساراً */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-login {
+  background-color: #ffffff;
+  color: var(--text-main);
+  border: 1px solid #cbd5e1;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.btn-login:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.btn-start {
+  background-color: var(--primary);
+  color: #ffffff;
+  border: 1px solid var(--primary);
+  padding: 8px 22px;
+  border-radius: var(--radius-pill);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.btn-start:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  box-shadow: 0 4px 10px rgba(11, 122, 111, 0.25);
+}
+
+/* --------------------------------------------------------------------------
+   4. الفوتر الموحد (Unified Footer)
+   -------------------------------------------------------------------------- */
+.site-footer {
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--border-light);
+  padding: 24px 0;
+  margin-top: auto;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.site-footer .footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1350px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.footer-brand {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.footer-links {
+  display: flex;
+  gap: 22px;
+  list-style: none;
+}
+
+.footer-links a:hover {
+  color: var(--primary);
+}
+
+/* ==========================================================================
+   5. تنسيقات الصفحة الرئيسية (Home Page Styles)
+   ========================================================================== */
+
+/* قسم Hero */
+.hero-section {
+  padding: 60px 0 70px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 48px;
+}
+
+.hero-content h1 {
+  font-size: 2.85rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1.25;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 32px;
+  max-width: 520px;
+}
+
+.btn-hero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  padding: 14px 44px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 14px rgba(11, 122, 111, 0.3);
+}
+
+.btn-hero:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+.hero-image-wrap {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-light);
+  background: #ffffff;
+}
+
+/* قسم المميزات */
+.features-section {
+  padding: 70px 0;
+  background-color: #ffffff;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  text-align: center;
+}
+
+.section-header {
+  margin-bottom: 48px;
+}
+
+.section-header h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.section-header p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.feature-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 36px 24px;
+  text-align: center;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-border);
+}
+
+.feature-icon-bubble {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.feature-card h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 12px;
+}
+
+.feature-card p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* قسم قوالب تلهم مسيرتك في الصفحة الرئيسية */
+.home-templates-section {
+  padding: 70px 0 80px;
+}
+
+.home-templates-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 36px;
+}
+
+.home-templates-header h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+
+.home-templates-header p {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+}
+
+.link-view-all {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.link-view-all:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+.home-templates-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.home-template-mini-card {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.home-template-mini-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.home-template-img {
+  width: 100%;
+  height: 220px;
+  background: #f1f5f9;
+  object-fit: cover;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.home-template-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--primary);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.home-template-footer {
+  padding: 14px 16px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   6. تنسيقات صفحة القوالب (Templates Page Styles)
+   ========================================================================== */
+.templates-page-header {
+  text-align: center;
+  padding: 50px 0 24px;
+}
+
+.templates-page-header h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 12px;
+}
+
+.templates-page-header p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* أزرار الفلترة */
+.filter-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 28px 0 45px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 8px 24px;
+  border-radius: var(--radius-pill);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.filter-btn.active {
+  background-color: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+/* شبكة القوالب (CSS Grid) */
+.templates-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  padding-bottom: 80px;
+}
+
+.template-card {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+
+.template-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-border);
+}
+
+.template-card.featured {
+  border: 2px solid var(--primary);
+}
+
+/* شارات القوالب */
+.card-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 5;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.card-badge.selected {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+.card-badge.new {
+  background-color: var(--badge-new);
+  color: #ffffff;
+}
+
+.template-thumb-wrap {
+  width: 100%;
+  height: 330px;
+  background: #f1f5f9;
+  border-bottom: 1px solid var(--border-light);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.template-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.template-card:hover .template-thumb {
+  transform: scale(1.03);
+}
+
+.template-info {
+  padding: 20px 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.template-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.template-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.btn-select-template {
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-align: center;
+  display: block;
+}
+
+.btn-outline {
+  border: 1px solid #1e293b;
+  color: #1e293b;
+  background-color: #ffffff;
+}
+
+.btn-outline:hover {
+  background-color: #f8fafc;
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.btn-filled {
+  background-color: var(--primary);
+  color: #ffffff;
+  border: 1px solid var(--primary);
+}
+
+.btn-filled:hover {
+  background-color: var(--primary-hover);
+}
+
+/* ==========================================================================
+   7. تنسيقات واجهة مساحة العمل (Builder Interface Layout)
+   ========================================================================== */
+.builder-layout {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 72px);
+  width: 100%;
+  overflow: hidden;
+}
+
+/* القسم الأيمن: شريط الأدوات الجانبي (25%) */
+.builder-sidebar {
+  width: 25%;
+  min-width: 300px;
+  max-width: 360px;
+  background-color: var(--bg-sidebar);
+  border-left: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px 24px;
+  overflow-y: auto;
+}
+
+.sidebar-heading-area {
+  margin-bottom: 28px;
+}
+
+.sidebar-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.sidebar-subtitle {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+/* قائمة خطوات البناء */
+.steps-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.step-item:hover {
+  background-color: #ffffff;
+  color: var(--primary);
+}
+
+.step-item.active {
+  background-color: #ffffff;
+  color: var(--primary);
+  box-shadow: var(--shadow-sm);
+  font-weight: 700;
+}
+
+.step-icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* زر تحميل السريع الصغير داخل الخطوات */
+.btn-quick-download {
+  background-color: var(--primary);
+  color: #ffffff;
+  padding: 11px 20px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 0.98rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 3px 8px rgba(11, 122, 111, 0.2);
+}
+
+.btn-quick-download:hover {
+  background-color: var(--primary-hover);
+}
+
+/* أزرار الإجراءات السفلية في الشريط الجانبي */
+.sidebar-bottom-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+.btn-pdf-download {
+  background-color: var(--primary);
+  color: #ffffff;
+  padding: 13px 20px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid var(--primary);
+}
+
+.btn-pdf-download:hover {
+  background-color: var(--primary-hover);
+  box-shadow: 0 4px 12px rgba(11, 122, 111, 0.25);
+}
+
+.btn-edit-data {
+  background-color: #ffffff;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-edit-data:hover {
+  background-color: var(--primary-light);
+}
+
+/* القسم الأيسر: منطقة المعاينة الحية لورقة A4 (Preview Area) */
+.builder-preview-area {
+  width: 75%;
+  flex: 1;
+  background-color: #e2e8f0; /* رمادي غامق قليلاً لإبراز ورقة السيرة الذاتية البيضاء */
+  display: flex;
+  align-items: flex-start;  /* يضمن ظهور أعلى الورقة دون اقتطاع عند التمرير */
+  justify-content: center;   /* توسيط الورقة أفقياً داخل مساحة العرض */
+  position: relative;
+  overflow: auto;            /* تمكين التمرير الرأسي والأفقي بسلاسة */
+  padding: 40px 20px 80px;
+  scroll-behavior: smooth;
+}
+
+/* تصغير الورقة وعزل أبعاد A4 (Scaling & A4 Canvas) */
+.builder-preview-area #cv-container {
+  width: 210mm;
+  min-height: 297mm;
+  flex-shrink: 0;            /* منع انكماش الورقة تحت ضغط الفليكس */
+  transform: scale(0.7);     /* تصغير الورقة لتناسب الشاشة دون تشويه التخطيط الداخلي */
+  transform-origin: top center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.08);
+  margin-bottom: calc(297mm * -0.28); /* تعويض الفراغ السفلي الناتج عن التصغير */
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* استعلامات الوسائط لتجاوب مقياس الورقة (Scale) مع مختلف أحجام الشاشات */
+@media (max-width: 1280px) {
+  .builder-preview-area #cv-container {
+    transform: scale(0.62);
+    margin-bottom: calc(297mm * -0.36);
+  }
+}
+
+@media (max-width: 1024px) {
+  .builder-preview-area #cv-container {
+    transform: scale(0.55);
+    margin-bottom: calc(297mm * -0.42);
+  }
+}
+
+@media (max-width: 640px) {
+  .builder-preview-area #cv-container {
+    transform: scale(0.42);
+    margin-bottom: calc(297mm * -0.55);
+  }
+}
+
+/* أزرار التحكم العائمة (Zoom Controls) */
+.floating-zoom-toolbar {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ffffff;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px;
+  gap: 4px;
+  z-index: 20;
+}
+
+.zoom-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #475569;
+  transition: all 0.2s;
+}
+
+.zoom-btn:hover {
+  background-color: #f1f5f9;
+  color: var(--primary);
+}
+
+.zoom-divider {
+  width: 24px;
+  height: 1px;
+  background-color: var(--border-color);
+}
+
+/* ==========================================================================
+   8. التجاوب مع مختلف الشاشات (Media Queries)
+   ========================================================================== */
+
+/* أجهزة التابلت والشاشات المتوسطة */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    text-align: center;
+  }
+
+  .hero-content p {
+    margin: 0 auto 28px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .home-templates-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .templates-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .builder-layout {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .builder-sidebar {
+    width: 100%;
+    max-width: 100%;
+    border-left: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .builder-preview-area {
+    width: 100%;
+    min-height: 80vh;
+  }
+
+  .floating-zoom-toolbar {
+    right: 16px;
+  }
+}
+
+/* شاشات الهواتف المحمولة */
+@media (max-width: 640px) {
+  .site-header .header-inner {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .main-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.1rem;
+  }
+
+  .home-templates-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .home-templates-row {
+    grid-template-columns: 1fr;
+  }
+
+  .templates-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-tabs {
+    gap: 8px;
+  }
+
+  .filter-btn {
+    padding: 6px 16px;
+    font-size: 0.85rem;
+  }
+
+  .site-footer .footer-inner {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+  }
+}
+
+/* ==========================================================================
+   9. تنسيقات نموذج إدخال البيانات في شريط البناء (Builder Form Controls)
+   ========================================================================== */
+.builder-form-wrapper {
+  margin-top: 20px;
+}
+
+.step-panel {
+  display: none;
+  animation: fadeInStep 0.25s ease forwards;
+}
+
+.step-panel.active {
+  display: block;
+}
+
+@keyframes fadeInStep {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-tajawal);
+  font-size: 0.92rem;
+  background-color: #ffffff;
+  color: var(--text-main);
+  transition: all 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(11, 122, 111, 0.12);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.form-hint {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* شريط تبديل القوالب داخل مساحة العمل */
+.template-selector-bar {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.template-selector-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.template-dropdown {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  font-family: var(--font-tajawal);
+  font-size: 0.88rem;
+  color: var(--text-main);
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+/* رفع الصورة في الشريط */
+.sidebar-avatar-upload {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff;
+  border: 1px dashed var(--primary-border);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  margin-bottom: 16px;
+}
+
+.sidebar-avatar-preview {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+  background: #f1f5f9;
+}
+
+.avatar-upload-action {
+  flex: 1;
+}
+
+.avatar-upload-action input[type="file"] {
+  display: none;
+}
+
+.btn-upload-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   10. الهيكل العام المشترك لورقة السيرة الذاتية (CV Sheet & Themes)
+   ========================================================================== */
+.cv-sheet-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-align: right;
+  direction: rtl;
+  font-family: var(--font-tajawal);
+  position: relative;
+}
+
+/* --------------------------------------------------------------------------
+   القالب 1: المسار الاحترافي (Theme Classic)
+   -------------------------------------------------------------------------- */
+.theme-classic {
+  background-color: #ffffff;
+  color: #1e293b;
+}
+
+.theme-classic .cv-top-banner {
+  background: linear-gradient(135deg, #085f57 0%, #0b7a6f 100%);
+  color: #ffffff;
+  padding: 28px 32px 20px;
+}
+
+.theme-classic .cv-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.theme-classic .cv-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  object-fit: cover;
+}
+
+.theme-classic .cv-header-name {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.theme-classic .cv-header-title {
+  font-size: 1rem;
+  color: #d1fae5;
+  font-weight: 400;
+}
+
+.theme-classic .cv-contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  font-size: 0.85rem;
+}
+
+.theme-classic .cv-body-content {
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.theme-classic .cv-section-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #0b7a6f;
+  border-bottom: 2px solid #e6f4f2;
+  padding-bottom: 4px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* --------------------------------------------------------------------------
+   القالب 2: القالب الإبداعي (Theme Creative - Two Columns)
+   -------------------------------------------------------------------------- */
+.theme-creative {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  height: 100%;
+  background: #ffffff;
+}
+
+.theme-creative .creative-sidebar {
+  background-color: #1e293b;
+  color: #ffffff;
+  padding: 28px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+}
+
+.theme-creative .creative-photo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid #0b7a6f;
+  margin: 0 auto;
+  object-fit: cover;
+}
+
+.theme-creative .creative-sidebar-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #5eead4;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+  text-align: right;
+}
+
+.theme-creative .creative-contact-item {
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  text-align: right;
+  margin-bottom: 6px;
+  word-break: break-all;
+}
+
+.theme-creative .creative-main {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.theme-creative .creative-name {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0b7a6f;
+}
+
+.theme-creative .creative-title {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #64748b;
+  margin-bottom: 14px;
+}
+
+.theme-creative .creative-section-title {
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: #1e293b;
+  border-right: 4px solid #0b7a6f;
+  padding-right: 8px;
+  margin-bottom: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   القالب 3: الرؤية الحديثة (Theme Modern Vision)
+   -------------------------------------------------------------------------- */
+.theme-modern {
+  background: #ffffff;
+  padding: 28px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.theme-modern .modern-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid #0b7a6f;
+  padding-bottom: 18px;
+}
+
+.theme-modern .modern-identity h1 {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #0b7a6f;
+}
+
+.theme-modern .modern-identity p {
+  font-size: 1.05rem;
+  color: #475569;
+}
+
+.theme-modern .modern-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: #64748b;
+  text-align: left;
+}
+
+.theme-modern .modern-section-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #0b7a6f;
+  background-color: #f0fdfa;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   القالب 4: الباحث المتميز (Theme Academic)
+   -------------------------------------------------------------------------- */
+.theme-academic {
+  background: #ffffff;
+  padding: 36px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.theme-academic .academic-header {
+  text-align: center;
+  border-bottom: 1.5px solid #1e293b;
+  padding-bottom: 14px;
+}
+
+.theme-academic .academic-name {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.theme-academic .academic-title {
+  font-size: 1.05rem;
+  color: #475569;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.theme-academic .academic-contact {
+  font-size: 0.85rem;
+  color: #64748b;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.theme-academic .academic-section-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+}
+
+/* التنسيق المشترك لبطاقات المهارات والمشاريع */
+.cv-grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.cv-mini-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-size: 0.85rem;
+}
+
+.cv-mini-card-title {
+  font-weight: 700;
+  color: #0b7a6f;
+  margin-bottom: 2px;
+}
+
+.cv-mini-card-desc {
+  font-size: 0.8rem;
+  color: #475569;
+  line-height: 1.4;
+}
+

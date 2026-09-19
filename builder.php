@@ -22,7 +22,7 @@
   <header class="site-header no-print">
     <div class="header-inner">
       <!-- الشعار -->
-      <a href="index.html" class="site-logo">
+      <a href="index.php" class="site-logo">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
           <polyline points="14 2 14 8 20 8"></polyline>
@@ -35,8 +35,8 @@
 
       <!-- روابط التنقل -->
       <nav class="main-nav">
-        <a href="index.html" class="nav-link">الرئيسية</a>
-        <a href="templates.html" class="nav-link">القوالب</a>
+        <a href="index.php" class="nav-link">الرئيسية</a>
+        <a href="templates.php" class="nav-link">القوالب</a>
         <a href="#pricing" class="nav-link">الأسعار</a>
         <a href="#about" class="nav-link">حولنا</a>
       </nav>
@@ -44,7 +44,7 @@
       <!-- أزرار الإجراء -->
       <div class="header-actions">
         <a href="#login" class="btn-login">تسجيل الدخول</a>
-        <a href="templates.html" class="btn-start">تغيير القالب</a>
+        <a href="templates.php" class="btn-start">تغيير القالب</a>
       </div>
     </div>
   </header>
@@ -127,7 +127,7 @@
         </ul>
 
         <!-- نافذة ونموذج إدخال البيانات (Form) المربوط حياً -->
-        <form id="cvBuilderForm" class="builder-form-wrapper">
+        <form id="cvBuilderForm" class="builder-form-wrapper" action="save_cv.php" method="post" enctype="multipart/form-data">
           
           <!-- القسم 1: المعلومات الشخصية -->
           <div class="step-panel active" id="panel-1">
@@ -246,7 +246,7 @@
           <span>تحميل وتصدير PDF</span>
         </button>
 
-        <a href="templates.html" class="btn-edit-data">
+        <a href="templates.php" class="btn-edit-data">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
             <rect x="3" y="3" width="7" height="7"></rect>
             <rect x="14" y="3" width="7" height="7"></rect>
@@ -455,7 +455,11 @@
   <footer class="site-footer no-print">
     <div class="footer-inner">
       <div class="footer-brand">صانع السير الذاتية</div>
-      <div>&copy; 2024 صانع السير الذاتية. جميع الحقوق محفوظة</div>
+      <div class="footer-author">
+        <img class="footer-author-avatar" src="uploads/abdulrahman.jpg" alt="صورة م/ عبد الرحمن الحميدي" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <span class="footer-author-fallback" aria-hidden="true">م ع</span>
+        <div>تصميم وتطوير: م/ عبد الرحمن الحميدي<small>&copy; 2026 جميع الحقوق محفوظة</small></div>
+      </div>
       <ul class="footer-links">
         <li><a href="#privacy">سياسة الخصوصية</a></li>
         <li><a href="#terms">شروط الخدمة</a></li>

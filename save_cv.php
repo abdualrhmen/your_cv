@@ -29,9 +29,12 @@ try {
     $job_title = isset($_POST['job_title']) ? trim(strip_tags($_POST['job_title'])) : '';
     $phone     = isset($_POST['phone'])     ? trim(strip_tags($_POST['phone'])) : '';
     $email     = isset($_POST['email'])     ? trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL)) : '';
-    $bio       = isset($_POST['bio'])       ? trim($_POST['bio']) : '';
-    $skills    = isset($_POST['skills'])    ? trim($_POST['skills']) : '';
-    $projects  = isset($_POST['projects'])  ? trim($_POST['projects']) : '';
+    $location  = isset($_POST['location'])  ? trim(strip_tags($_POST['location'])) : '';
+    $bio       = isset($_POST['bio'])        ? trim($_POST['bio']) : '';
+    $experience = isset($_POST['experience']) ? trim($_POST['experience']) : '';
+    $education = isset($_POST['education']) ? trim($_POST['education']) : '';
+    $skills    = isset($_POST['skills'])     ? trim($_POST['skills']) : '';
+    $projects  = isset($_POST['projects'])   ? trim($_POST['projects']) : '';
 
     // التحقق من الحقول الأساسية الإلزامية
     if (empty($full_name) || empty($job_title) || empty($email) || empty($phone)) {
@@ -132,9 +135,9 @@ try {
     }
 
     // 3. إدخال البيانات في قاعدة البيانات باستخدام Prepared Statements
-    $sql = "INSERT INTO `cv_data` 
-            (`full_name`, `job_title`, `phone`, `email`, `bio`, `skills`, `projects`, `image_path`) 
-            VALUES (:full_name, :job_title, :phone, :email, :bio, :skills, :projects, :image_path)";
+        $sql = "INSERT INTO `cv_data`
+            (`full_name`, `job_title`, `phone`, `email`, `location`, `bio`, `experience`, `education`, `skills`, `projects`, `image_path`)
+            VALUES (:full_name, :job_title, :phone, :email, :location, :bio, :experience, :education, :skills, :projects, :image_path)";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
@@ -142,7 +145,10 @@ try {
         ':job_title'  => $job_title,
         ':phone'      => $phone,
         ':email'      => $email,
+        ':location'   => $location,
         ':bio'        => $bio,
+        ':experience' => $experience,
+        ':education'  => $education,
         ':skills'     => $skills,
         ':projects'   => $projects,
         ':image_path' => $image_path
@@ -159,13 +165,15 @@ try {
     ], JSON_UNESCAPED_UNICODE);
 
 } catch (PDOException $e) {
+    error_log('CV Builder database error: ' . $e->getMessage());
     echo json_encode([
         'status'  => 'error',
-        'message' => 'خطأ أثناء تسجيل البيانات في قاعدة البيانات: ' . $e->getMessage()
+        'message' => 'حدث خطأ أثناء تسجيل البيانات في قاعدة البيانات.'
     ], JSON_UNESCAPED_UNICODE);
 } catch (Exception $e) {
+    error_log('CV Builder unexpected error: ' . $e->getMessage());
     echo json_encode([
         'status'  => 'error',
-        'message' => 'حدث خطأ غير متوقع: ' . $e->getMessage()
+        'message' => 'حدث خطأ غير متوقع أثناء معالجة الطلب.'
     ], JSON_UNESCAPED_UNICODE);
 }

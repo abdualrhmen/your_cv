@@ -229,6 +229,43 @@ button {
   color: var(--primary);
 }
 
+.footer-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+.footer-author-avatar,
+.footer-author-fallback {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+}
+
+.footer-author-avatar {
+  object-fit: cover;
+  border: 2px solid var(--primary-border);
+}
+
+.footer-author-fallback {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-light);
+  border: 2px solid var(--primary-border);
+  color: var(--primary);
+  font-size: 0.9rem;
+}
+
+.footer-author small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
 .footer-links {
   display: flex;
   gap: 22px;

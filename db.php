@@ -1,71 +1,29 @@
 <?php
-/**
- * =======================================================
- * db.php - ملف الاتصال بقاعدة البيانات (MySQL via PDO)
- * =======================================================
- * يدعم الاتصال المرن عبر 127.0.0.1 و localhost لتفادي مشاكل الـ IPv6.
- * يقوم بإنشاء قاعدة البيانات وجدول cv_data تلقائياً عند التشغيل الأول.
- */
+declare(strict_types=1);
 
-$username = 'root';
-$password = '';
-$dbname   = 'cv_builder_db';
-$charset  = 'utf8mb4';
+// عدّل هذه القيم وفق بيانات XAMPP أو InfinityFree قبل النشر.
+$db_host = '127.0.0.1';
+$db_name = 'cv_builder_db';
+$db_user = 'root';
+$db_password = '';
+$db_charset = 'utf8mb4';
 
-$pdo = null;
-$lastError = null;
+$dsn = "mysql:host={$db_host};dbname={$db_name};charset={$db_charset}";
 
-// محاولة الاتصال عبر 127.0.0.1 أولاً ثم localhost لتجنب مشاكل دقة أسماء النطاقات في ويندوز
-$hosts = ['127.0.0.1', 'localhost'];
+try {
+    $pdo = new PDO($dsn, $db_user, $db_password, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES => false,
+    ]);
+} catch (PDOException $exception) {
+    error_log('CV Builder database connection failed: ' . $exception->getMessage());
 
-foreach ($hosts as $host) {
-    try {
-        // 1. الاتصال لإنشاء قاعدة البيانات إن لم تكن متوفرة
-        $tempDsn = "mysql:host={$host};charset={$charset}";
-        $tempPdo = new PDO($tempDsn, $username, $password, [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_TIMEOUT => 2
-        ]);
-        $tempPdo->exec("CREATE DATABASE IF NOT EXISTS `{$dbname}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
-
-        // 2. الاتصال الفعلي بقاعدة البيانات
-        $dsn = "mysql:host={$host};dbname={$dbname};charset={$charset}";
-        $pdo = new PDO($dsn, $username, $password, [
-            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES   => false,
-        ]);
-
-        // 3. التحقق من وجود جدول cv_data وإنشاؤه تلقائياً
-        $tableSql = "CREATE TABLE IF NOT EXISTS `cv_data` (
-            `id` INT AUTO_INCREMENT PRIMARY KEY,
-            `full_name` VARCHAR(150) NOT NULL,
-            `job_title` VARCHAR(150) NOT NULL,
-            `phone` VARCHAR(50) NOT NULL,
-            `email` VARCHAR(150) NOT NULL,
-            `bio` TEXT NULL,
-            `skills` TEXT NULL,
-            `projects` TEXT NULL,
-            `image_path` VARCHAR(255) NULL,
-            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
-
-        $pdo->exec($tableSql);
-
-        // تم الاتصال بنجاح، إنهاء حلقة المحاولات
-        break;
-
-    } catch (PDOException $e) {
-        $lastError = $e->getMessage();
-    }
-}
-
-// في حال فشل الاتصال مع كافة العناوين
-if (!$pdo) {
+    http_response_code(500);
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode([
-        'status'  => 'error',
-        'message' => 'تعذر الاتصال بخادم MySQL. يرجى التأكد من تشغيل MySQL في لوحة XAMPP (تفاصيل الخطأ: ' . $lastError . ')'
+        'status' => 'error',
+        'message' => 'تعذر الاتصال بقاعدة البيانات. تحقق من إعدادات db.php وبيانات MySQL.'
     ], JSON_UNESCAPED_UNICODE);
     exit;
 }

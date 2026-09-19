@@ -21,7 +21,7 @@
   <header class="site-header">
     <div class="header-inner">
       <!-- الشعار -->
-      <a href="index.html" class="site-logo">
+      <a href="index.php" class="site-logo">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
           <polyline points="14 2 14 8 20 8"></polyline>
@@ -34,8 +34,8 @@
 
       <!-- روابط التنقل (القوالب نشطة) -->
       <nav class="main-nav">
-        <a href="index.html" class="nav-link">الرئيسية</a>
-        <a href="templates.html" class="nav-link active">القوالب</a>
+        <a href="index.php" class="nav-link">الرئيسية</a>
+        <a href="templates.php" class="nav-link active">القوالب</a>
         <a href="#pricing" class="nav-link">الأسعار</a>
         <a href="#about" class="nav-link">حولنا</a>
       </nav>
@@ -43,7 +43,7 @@
       <!-- أزرار الإجراء -->
       <div class="header-actions">
         <a href="#login" class="btn-login">تسجيل الدخول</a>
-        <a href="builder.html?theme=theme-professional" class="btn-start">ابدأ الآن</a>
+        <a href="builder.php?theme=theme-professional" class="btn-start">ابدأ الآن</a>
       </div>
     </div>
   </header>
@@ -108,7 +108,7 @@
         <div class="template-info">
           <h3 class="template-title">المسار الاحترافي</h3>
           <p class="template-desc">كلاسيكي، نظيف وبسيط، خلفية بيضاء بالكامل مع خطوط خضراء</p>
-          <a href="builder.html?theme=theme-professional" class="btn-select-template btn-filled">اختيار هذا القالب</a>
+          <a href="builder.php?theme=theme-professional" class="btn-select-template btn-filled">اختيار هذا القالب</a>
         </div>
       </article>
 
@@ -151,7 +151,7 @@
         <div class="template-info">
           <h3 class="template-title">القالب الإبداعي</h3>
           <p class="template-desc">شريط جانبي داكن بنسبة 30% مع صورة دائرية بالمنتصف وتنسيق فني</p>
-          <a href="builder.html?theme=theme-creative" class="btn-select-template btn-outline">اختيار هذا القالب</a>
+          <a href="builder.php?theme=theme-creative" class="btn-select-template btn-outline">اختيار هذا القالب</a>
         </div>
       </article>
 
@@ -189,7 +189,7 @@
         <div class="template-info">
           <h3 class="template-title">الرؤية الحديثة</h3>
           <p class="template-desc">هيدر ملون بخلفية خضراء واسعة مع صورة متداخلة وتنسيق معاصر</p>
-          <a href="builder.html?theme=theme-modern" class="btn-select-template btn-outline">اختيار هذا القالب</a>
+          <a href="builder.php?theme=theme-modern" class="btn-select-template btn-outline">اختيار هذا القالب</a>
         </div>
       </article>
 
@@ -236,7 +236,7 @@
         <div class="template-info">
           <h3 class="template-title">القالب الاحترافي الشامل</h3>
           <p class="template-desc">رسمي ومكثف، مستطيل علوي رفيع داكن، مع شبكة Grid وحدود سفلية خضراء</p>
-          <a href="builder.html?theme=theme-comprehensive" class="btn-select-template btn-outline">اختيار هذا القالب</a>
+          <a href="builder.php?theme=theme-comprehensive" class="btn-select-template btn-outline">اختيار هذا القالب</a>
         </div>
       </article>
 
@@ -249,7 +249,11 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-brand">صانع السير الذاتية</div>
-      <div>&copy; 2024 صانع السير الذاتية. جميع الحقوق محفوظة</div>
+      <div class="footer-author">
+        <img class="footer-author-avatar" src="uploads/abdulrahman.jpg" alt="صورة م/ عبد الرحمن الحميدي" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <span class="footer-author-fallback" aria-hidden="true">م ع</span>
+        <div>تصميم وتطوير: م/ عبد الرحمن الحميدي<small>&copy; 2026 جميع الحقوق محفوظة</small></div>
+      </div>
       <ul class="footer-links">
         <li><a href="#privacy">سياسة الخصوصية</a></li>
         <li><a href="#terms">شروط الخدمة</a></li>

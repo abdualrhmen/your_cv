@@ -51,6 +51,51 @@ body {
     flex-direction: column;
 }
 
+.footer-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-main);
+    font-weight: 700;
+}
+
+.site-author-footer {
+    justify-content: center;
+    width: 100%;
+    padding: 18px 24px;
+    border-top: 1px solid var(--border-light);
+    background-color: var(--bg-card);
+}
+
+.footer-author-avatar,
+.footer-author-fallback {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+}
+
+.footer-author-avatar {
+    object-fit: cover;
+    border: 2px solid var(--teal-border);
+}
+
+.footer-author-fallback {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: var(--teal-subtle);
+    border: 2px solid var(--teal-border);
+    color: var(--teal-primary);
+    font-size: 0.9rem;
+}
+
+.footer-author small {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+
 /* =======================================================
    ترويسة الموقع العلوية (Header)
    ======================================================= */

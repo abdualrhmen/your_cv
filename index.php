@@ -263,6 +263,12 @@ PHP & MySQL * خبير
 
     </main>
 
+    <footer class="site-author-footer footer-author">
+        <img class="footer-author-avatar" src="uploads/abdulrahman.jpg" alt="صورة م/ عبد الرحمن الحميدي" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <span class="footer-author-fallback" aria-hidden="true">م ع</span>
+        <div>تصميم وتطوير: م/ عبد الرحمن الحميدي<small>&copy; 2026 جميع الحقوق محفوظة</small></div>
+    </footer>
+
     <!-- ملف التفاعلات الحية والجافاسكربت -->
     <script src="script.js"></script>
 </body>

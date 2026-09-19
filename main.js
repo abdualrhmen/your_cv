@@ -8,7 +8,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // --------------------------------------------------------------------------
-  // 1. نظام فلترة القوالب التفاعلي (صفحة templates.html)
+  // 1. نظام فلترة القوالب التفاعلي (صفحة templates.php)
   // --------------------------------------------------------------------------
   const filterButtons = document.querySelectorAll('.filter-btn');
   const templateCards = document.querySelectorAll('.template-card');
@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       });
+    });
     // تمكين فتح القالب فور النقر على أي جزء من البطاقة
     templateCards.forEach(card => {
       card.style.cursor = 'pointer';
@@ -56,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 2. أدوات التحكم بالمعاينة (صفحة builder.html)
+  // 2. أدوات التحكم بالمعاينة (صفحة builder.php)
   // --------------------------------------------------------------------------
   const btnZoomIn = document.getElementById('btnZoomIn');
   const btnZoomOut = document.getElementById('btnZoomOut');
@@ -102,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 3. التنقل بين خطوات البناء (صفحة builder.html)
+  // 3. التنقل بين خطوات البناء (صفحة builder.php)
   // --------------------------------------------------------------------------
   const stepItems = document.querySelectorAll('.step-item');
   if (stepItems.length > 0) {

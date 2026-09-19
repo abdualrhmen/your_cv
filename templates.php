@@ -250,7 +250,7 @@
     <div class="footer-inner">
       <div class="footer-brand">صانع السير الذاتية</div>
       <div class="footer-author">
-        <img class="footer-author-avatar" src="uploads/abdulrahman.jpg" alt="صورة م/ عبد الرحمن الحميدي" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <img class="footer-author-avatar" src="uploads\abdualrhmen.jpg" alt="صورة م/ عبد الرحمن الحميدي" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <span class="footer-author-fallback" aria-hidden="true">م ع</span>
         <div>تصميم وتطوير: م/ عبد الرحمن الحميدي<small>&copy; 2026 جميع الحقوق محفوظة</small></div>
       </div>

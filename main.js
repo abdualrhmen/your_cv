@@ -115,4 +115,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const contactLink = document.getElementById('contactLink');
+  const contactModal = document.getElementById('contactModal');
+
+  if (contactLink && contactModal) {
+    const closeContactModal = () => {
+      contactModal.hidden = true;
+      document.body.style.overflow = '';
+    };
+
+    contactLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      contactModal.hidden = false;
+      document.body.style.overflow = 'hidden';
+    });
+
+    contactModal.querySelectorAll('[data-close-contact]').forEach((element) => {
+      element.addEventListener('click', closeContactModal);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !contactModal.hidden) {
+        closeContactModal();
+      }
+    });
+  }
+
 });
